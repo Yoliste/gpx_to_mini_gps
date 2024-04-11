@@ -5,18 +5,28 @@ import xmltodict
 import json
 
 
-def dd_to_dmm(coord):
+def dd_to_ddm(coord):
     # TODO
-    return True
+    if coord.startswith("-"):
+        coord = coord[1:]
+
+    spl = coord.split(".")
+    d = spl[0]
+    dm = round(float("0." + spl[1]) * 60, 3)
+    print(dm)
+
+    coord_ddm = str(d) + str(dm)
+
+    return str(coord_ddm)
 
 
 def write_last_line(file):
-    file.write("$PFEC,GPxfr,CTL,E*59")
+    file.write("$PFEC,GPxfr,CTL,E*59\n")
 
 
 def parse_gpx_waypoints(source_file):
     f = open(source_file, "r")
-    gpx_dict = xmltodict.parse(f)
+    gpx_dict = xmltodict.parse(f.read())
     waypoint_list = gpx_dict["gpx"]["wpt"]
     return waypoint_list
 
@@ -24,13 +34,13 @@ def parse_gpx_waypoints(source_file):
 class Waypoint:
     def __init__(self, name, lat, lon):
         self.name = name
-        self.lat = dd_to_dmm(abs(lat))
-        self.lon = dd_to_dmm(abs(lon))
-        if lat >= 0:
+        self.lat = dd_to_ddm(lat)
+        self.lon = dd_to_ddm(lon)
+        if float(lat) >= 0:
             self.north_south = "N"
         else:
             self.north_south = "S"
-        if lon >= 0:
+        if float(lon) >= 0:
             self.east_west = "E"
         else:
             self.east_west = "W"
@@ -41,12 +51,20 @@ class Waypoint:
     # lighthouses : end with P, brown disc
     # special marks : end with SP, yellow flag
     # isolated danger : endd with DG, red square
-    # coastal marks (used to "draw" the coast line) : start with TC
+    # coastal marks (used to "draw" the coast line) : start with TC, red skull
+    # DST (TSS) : starts with DST, purple birds (or something like that)
+    # ORTHO : black flag
     def _set_color_shape(self):
         # coastal line
         if self.name.startswith("TC"):
             self.color = "1"
             self.shape = "@y"
+        elif self.name.startswith("DST"):
+            self.color = "5"
+            self.shape = "@w"
+        elif self.name.startswith("ORTHO"):
+            self.color = "0"
+            self.shape = "@z"
         else:
             # cardinals
             if self.name.endswith(("N", "S", "E", "W")):
@@ -69,12 +87,12 @@ class Waypoint:
                 self.shape = "@r"
             else:
                 print("unknown waypoint format : {}".format(self.name))
-                self.color = None
-                self.shape = None
+                self.color = "0"
+                self.shape = "@z"
 
     def write(self, file):
-        line = "$PFEC,GPwpl,{lat},{ns},{lon},{ew},{name},{color},{shape},A,,,,".format(lat=self.lat,
-                                                                                       ns=self.north_south, lon=self.lon, ew=self.east_west, name=self.name, color=self.color, shape=self.shape)
+        line = "$PFEC,GPwpl,{lat},{ns},{lon},{ew},{name},{color},{shape},A,,,,\n".format(lat=self.lat,
+                                                                                         ns=self.north_south, lon=self.lon, ew=self.east_west, name=self.name, color=self.color, shape=self.shape)
         file.write(line)
 
 
