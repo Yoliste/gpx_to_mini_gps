@@ -16,7 +16,11 @@ def dd_to_ddm(coord):
     # zero padding for coordinates where degrees < 10
     if int(d) < 10:
         d = "0" + d
-    dm = round(float("0." + spl[1]) * 60, 3)
+    # dm = round(float("0." + spl[1]) * 60, 3)
+    dm_float = float("0." + spl[1]) * 60
+    dm = "{:02.3f}".format(dm_float)
+    if dm_float < 10:
+        dm = "0" + dm
 
     coord_ddm = str(d) + str(dm)
 
@@ -92,7 +96,7 @@ class Waypoint:
             else:
                 print("unknown waypoint format : {}".format(self.name))
                 self.color = "0"
-                self.shape = "@z"
+                self.shape = "@g"
 
     # not sure why but Matsutec-compatible files seem to have one additionnal 0 padding on longitude
     def _lon_padding(self):
