@@ -12,8 +12,11 @@ def dd_to_ddm(coord):
 
     spl = coord.split(".")
     d = spl[0]
+
+    # zero padding for coordinates where degrees < 10
+    if int(d) < 10:
+        d = "0" + d
     dm = round(float("0." + spl[1]) * 60, 3)
-    print(dm)
 
     coord_ddm = str(d) + str(dm)
 
@@ -36,6 +39,7 @@ class Waypoint:
         self.name = name
         self.lat = dd_to_ddm(lat)
         self.lon = dd_to_ddm(lon)
+        self._lon_padding()
         if float(lat) >= 0:
             self.north_south = "N"
         else:
@@ -89,6 +93,10 @@ class Waypoint:
                 print("unknown waypoint format : {}".format(self.name))
                 self.color = "0"
                 self.shape = "@z"
+
+    # not sure why but Matsutec-compatible files seem to have one additionnal 0 padding on longitude
+    def _lon_padding(self):
+        self.lon = "0" + self.lon
 
     def write(self, file):
         line = "$PFEC,GPwpl,{lat},{ns},{lon},{ew},{name},{color},{shape},A,,,,\n".format(lat=self.lat,
