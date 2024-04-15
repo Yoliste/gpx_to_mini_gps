@@ -117,4 +117,30 @@
       <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
     </extensions>
   </wpt>
+  <wpt lat="48.489610000" lon="-5.367198333">
+    <time>2020-05-01T16:42:03Z</time>
+    <name>DSTOU1</name>
+    <sym>triangle</sym>
+    <type>WPT</type>
+    <extensions>
+      <opencpn:guid>0f2eb84c-888b-4488-9876-34354a8bbbd3</opencpn:guid>
+      <opencpn:viz_name>1</opencpn:viz_name>
+      <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+      <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+    </extensions>
+  </wpt>
+  <wpt lat="16.180828333" lon="-61.096660000">
+    <time>2021-09-04T10:13:24Z</time>
+    <name>PTR2SP</name>
+    <sym>triangle</sym>
+    <type>WPT</type>
+    <extensions>
+      <opencpn:guid>5659dd5b-4ba8-4a07-a2c5-26f94fc59019</opencpn:guid>
+      <opencpn:viz_name>1</opencpn:viz_name>
+      <opencpn:arrival_radius>0.050</opencpn:arrival_radius>
+      <opencpn:waypoint_range_rings visible="false" number="0" step="1" units="0" colour="#FF0000" />
+      <opencpn:scale_min_max UseScale="false" ScaleMin="2147483646" ScaleMax="0" />
+    </extensions>
+  </wpt>
 </gpx>

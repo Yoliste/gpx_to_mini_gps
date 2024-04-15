@@ -16,7 +16,6 @@ def dd_to_ddm(coord):
     # zero padding for coordinates where degrees < 10
     if int(d) < 10:
         d = "0" + d
-    # dm = round(float("0." + spl[1]) * 60, 3)
     dm_float = float("0." + spl[1]) * 60
     dm = "{:02.3f}".format(dm_float)
     if dm_float < 10:
@@ -54,14 +53,6 @@ class Waypoint:
             self.east_west = "W"
         self._set_color_shape()
 
-    # cardinals : end with N, S, W or E (depending on directions), blue sideways square
-    # lateral buoys : end with either B or T, green or red flag
-    # lighthouses : end with P, brown disc
-    # special marks : end with SP, yellow flag
-    # isolated danger : endd with DG, red square
-    # coastal marks (used to "draw" the coast line) : start with TC, red skull
-    # DST (TSS) : starts with DST, purple birds (or something like that)
-    # ORTHO : black flag
     def _set_color_shape(self):
         # coastal line
         if self.name.startswith("TC"):
