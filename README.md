@@ -30,3 +30,7 @@ Waypoints that don't match any of those patterns are shaped as black dots.
 ## Import the waypoint file to a Matsutec GPS
 
 Serial connection (e.g. with screen, minicom or Putty), baud rate 38400.
+
+## Features to be added
+
+This script could theoretically support other brands of GPS but I don't have those, but if you provide me with specs of the needed output I can try to look into it.
