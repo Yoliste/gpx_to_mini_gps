@@ -31,10 +31,10 @@ def write_last_line(file):
 
 
 def parse_gpx_waypoints(source_file):
-    f = open(source_file, "r")
-    gpx_dict = xmltodict.parse(f.read())
-    waypoint_list = gpx_dict["gpx"]["wpt"]
-    return waypoint_list
+    with open(source_file, "r") as f:
+        gpx_dict = xmltodict.parse(f.read())
+        waypoint_list = gpx_dict["gpx"]["wpt"]
+        return waypoint_list
 
 
 class Waypoint:
@@ -106,17 +106,16 @@ def main():
 
     wpt_list = parse_gpx_waypoints(args.input)
 
-    output_file = open(args.output, "w")
+    with open(args.output, "w") as output_file:
+        for w in wpt_list:
+            if 'name' in w and '@lat' in w and '@lon' in w:
+                wpt = Waypoint(w['name'], w['@lat'], w['@lon'])
+                wpt.write(output_file)
+            else:
+                print("gpx format not supported :")
+                print(json.dumps(w))
 
-    for w in wpt_list:
-        if 'name' in w and '@lat' in w and '@lon' in w:
-            wpt = Waypoint(w['name'], w['@lat'], w['@lon'])
-            wpt.write(output_file)
-        else:
-            print("gpx format not supported :")
-            print(json.dumps(w))
-
-    write_last_line(output_file)
+        write_last_line(output_file)
 
 
 if __name__ == "__main__":
