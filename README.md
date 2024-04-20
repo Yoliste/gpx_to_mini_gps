@@ -5,7 +5,10 @@
 * Clone the repo
 * Install python3 if needed
 * Install the needed dependencies : `pip3 install xmltodict` (also json and argparse libraries)
-* Run the script, all arguments are described in the help message : `./gpx_to_matsutec.py -h`
+* Run the script, all arguments are described in the help message : `./gpx_to_matsutec.py -h`, for instance :
+```
+./gpx_to_matsutec.py -i sample.gpx -o sample.txt
+```
 
 ## Waypoint source (GPX file)
 
