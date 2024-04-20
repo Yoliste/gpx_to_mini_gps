@@ -54,7 +54,6 @@ class Waypoint:
         self._set_color_shape()
 
     def _set_color_shape(self):
-        # coastal line
         if self.name.startswith("TC"):
             self.color = "1"
             self.shape = "@y"
@@ -65,7 +64,6 @@ class Waypoint:
             self.color = "0"
             self.shape = "@z"
         else:
-            # cardinals
             if self.name.endswith(("N", "S", "E", "W")):
                 self.color = "6"
                 self.shape = "@s"

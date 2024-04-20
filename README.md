@@ -27,6 +27,11 @@ Waypoints are treated as follows :
 
 Waypoints that don't match any of those patterns are shaped as black dots.
 
+Here is a general doc on how waypoint formatting works on Matsutec GPS :
+
+![matsutec_wp_format](docs/matsutec_waypoint_format.png)
+
+
 ## Import the waypoint file to a Matsutec GPS
 
 Serial connection (e.g. with screen, minicom or Putty), baud rate 38400.
