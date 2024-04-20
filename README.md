@@ -34,6 +34,9 @@ Here is a general doc on how waypoint formatting works on Matsutec GPS :
 
 ![matsutec_wp_format](docs/matsutec_waypoint_format.png)
 
+### Customize the waypoint format
+
+Not implemented, but you can fork the script and modify the [`_set_color_shape`](https://github.com/Yoliste/gpx_to_mini_gps/blob/main/gpx_to_matsutec.py#L56) method to taste.
 
 ## Import the waypoint file to a Matsutec GPS
 
