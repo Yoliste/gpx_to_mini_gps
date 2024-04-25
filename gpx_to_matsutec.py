@@ -3,7 +3,7 @@
 import argparse
 import xmltodict
 import json
-
+import traceback
 
 def dd_to_ddm(coord):
     # TODO
@@ -35,6 +35,27 @@ def parse_gpx_waypoints(source_file):
         gpx_dict = xmltodict.parse(f.read())
         waypoint_list = gpx_dict["gpx"]["wpt"]
         return waypoint_list
+
+
+def process_waypoints(input_file, output_file):
+    ret = ""
+    try:
+        wpt_list = parse_gpx_waypoints(input_file)
+        with open(output_file, "w") as out:
+            for w in wpt_list:
+                if 'name' in w and '@lat' in w and '@lon' in w:
+                    wpt = Waypoint(w['name'], w['@lat'], w['@lon'])
+                    wpt.write(out)
+                else:
+                    ret = ret + "gpx format not supported :\n"
+                    ret = ret + json.dumps(w)
+
+            write_last_line(out)
+    except Exception as e:
+        ret = ret + traceback.format_exc()
+
+
+    return ret
 
 
 class Waypoint:
@@ -104,18 +125,10 @@ def main():
 
     args = parser.parse_args()
 
-    wpt_list = parse_gpx_waypoints(args.input)
+    ret = process_waypoints(args.input, args.output)
 
-    with open(args.output, "w") as output_file:
-        for w in wpt_list:
-            if 'name' in w and '@lat' in w and '@lon' in w:
-                wpt = Waypoint(w['name'], w['@lat'], w['@lon'])
-                wpt.write(output_file)
-            else:
-                print("gpx format not supported :")
-                print(json.dumps(w))
+    print(ret)
 
-        write_last_line(output_file)
 
 
 if __name__ == "__main__":
