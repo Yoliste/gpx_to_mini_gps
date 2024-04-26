@@ -1,10 +1,20 @@
 # Convert GPX file to a text file suitable for Matsutec-brand GPS
 
+## Standalone executables with GUI
+
+Standalone executable files are available in the `gui_executables` directory. These launch a minimalistic graphical interface for ease of use. You can also launch the GUI script with python. The GUI performs exactly the same tasks as the python script (in fact importing the script as a module).
+
+![gui](docs/gui.png)
+
 ## Script install
 
 * Clone the repo
 * Install python3 if needed
-* Install the needed dependencies : `pip3 install xmltodict` (also json and argparse libraries)
+* Install the needed dependencies (e.g. with `pip3 install xmltodict`) :
+    * xmltodict
+    * json
+    * argparse
+    * tkinter (GUI only)
 * Run the script, all arguments are described in the help message : `./gpx_to_matsutec.py -h`, for instance :
 ```
 ./gpx_to_matsutec.py -i sample.gpx -o sample.txt

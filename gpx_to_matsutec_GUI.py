@@ -7,6 +7,7 @@ import os
 import datetime
 
 window = tk.Tk()
+window.title('GPX to Matsutec converter')
 window.grid_columnconfigure(0, weight=1, uniform="fred")
 window.grid_columnconfigure(1, weight=1, uniform="fred")
 window.grid_columnconfigure(2, weight=1, uniform="fred")
@@ -64,7 +65,7 @@ def browse_file():
 # input_file.pack()
 
 tk.Button(window, text="Browse", command=browse_file).grid(row=1,column=3)
-tk.Button(window, text="OK", command=process_waypoints).grid(row=3,column=0)
+tk.Button(window, text="Convert", command=process_waypoints).grid(row=3,column=0)
 tk.Button(window, text="Quit", command=window.destroy).grid(row=3,column=3)
 
 window.mainloop()

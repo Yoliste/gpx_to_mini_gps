@@ -48,7 +48,7 @@ def process_waypoints(input_file, output_file):
                     wpt.write(out)
                 else:
                     ret = ret + "gpx format not supported :\n"
-                    ret = ret + json.dumps(w)
+                    ret = ret + json.dumps(w) + "\n"
 
             write_last_line(out)
     except Exception as e:
