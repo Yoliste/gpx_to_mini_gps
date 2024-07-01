@@ -84,8 +84,14 @@ class Waypoint:
         elif self.name.startswith("ORTHO"):
             self.color = "0"
             self.shape = "@z"
+        elif self.name.startswith("ZI"):
+            self.color = "0"
+            self.shape = "@z"
         else:
-            if self.name.endswith(("N", "S", "E", "W")):
+            if self.name.endswith("SW"):
+                self.color = "5"
+                self.shape = "@q"
+            elif self.name.endswith(("N", "S", "E", "W")):
                 self.color = "6"
                 self.shape = "@s"
             elif self.name.endswith("B"):

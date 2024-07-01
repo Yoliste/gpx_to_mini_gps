@@ -31,11 +31,13 @@ The script parses the waypoint name in order to determine shape and color for be
 Waypoints are treated as follows :
 * Cardinals : waypoint name ends with N, S, W or E (depending on directions), blue sideways square
 * Lateral buoys : end with either B or T (bâbord/tribord, french for port and starboard), red or green flag respectively
-* Lighthouses : end with P, brown point
+* Lighthouses : end with P, brown circle
 * Special marks : end with SP, yellow flag
 * Isolated danger : endd with DG, red square
 * Coastal marks (can be used to "draw" the coast line or unmarked danger) : start with TC ("trait de côte"), red skull
 * DST (french for TSS) : starts with DST, purple birds (or something like that)
+* ZI (Zone Interdite) : starts with ZI, black flag
+* SW (Safe Water) : ends with SW, purple circle
 * ORTHO : black flag
 
 Waypoints that don't match any of those patterns are shaped as black dots.
